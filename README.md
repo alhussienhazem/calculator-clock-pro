@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![Dark Calculator Pro](calculator-showcase.png)
+![Dark Calculator Pro](calculator-showcase.jpg)
 
 </div>
 
