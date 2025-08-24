@@ -89,11 +89,12 @@
 ## 📁 Project Structure
 
 ```
-AlhussienHazem-Task-9/
+dark-theme-calculator-pro/
 ├── index.html          # Main calculator interface
 ├── script.js           # Calculator logic and UI
 ├── style.css           # Additional styling (if any)
-└── README.md           # This file
+├── README.md           # This file
+└── calculator-showcase.jpg  # Calculator preview image
 ```
 
 ---
@@ -113,15 +114,10 @@ AlhussienHazem-Task-9/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/alhussienhazem/dark-calculator-pro.git
+   git clone https://github.com/alhussienhazem/dark-theme-calculator-pro.git
    ```
 
-2. **Navigate to the project directory**
-   ```bash
-   cd AlhussienHazem-Task-9
-   ```
-
-3. **Open in your browser**
+2. **Open in your browser**
    - Open `index.html` in your web browser
    - Start calculating with the professional interface
    - Test advanced functions like square root and powers
