@@ -74,6 +74,8 @@
 - Cross-browser compatibility
 - No external dependencies
 
+---
+
 ## 🛠️ Technologies Used
 
 - **HTML5** - Semantic structure and input elements
@@ -81,6 +83,8 @@
 - **CSS-in-JS** - Dynamic styling with JavaScript
 - **Modern UI/UX** - Professional calculator design
 - **Responsive Design** - Adaptive layout system
+
+---
 
 ## 📁 Project Structure
 
