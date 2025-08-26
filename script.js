@@ -1,11 +1,10 @@
 // 🚀 Multi-Tool Calculator & Clock
-let display = document.getElementById('answer');
-let resultDisplay = document.getElementById('result-display');
 // 🌟 Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', () => {
+    let display = document.getElementById('answer');
     showView('calculator');
     setInterval(updateClock, 1000);
-    setupCalculator();
+    setupCalculator(display);
 });
 // 🧭 Switch between calculator and clock views
 function showView(view) {
@@ -67,46 +66,51 @@ function updateClock() {
     document.getElementById('date-display').textContent = dateString;
 }
 // 🧮 Set up calculator button listeners
-function setupCalculator() {
+function setupCalculator(display) {
     const buttons = document.querySelectorAll('.calc-btn');
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             const text = button.textContent;
             
             if (text === '=') {
-                doAnser();
+                doAnser(display);
             } else if (text === 'CE') {
-                clre();
+                clre(display);
             } else if (text === '⌫') {
-                delte();
+                delte(display);
             } else if (text === '√') {
-                getsquare();
+                getsquare(display);
             } else if (text === '∛') {
-                getsquare3();
+                getsquare3(display);
             } else if (text === '÷' || text === '×' || text === '−' || text === '+') {
-                WriteNumbers(text);
+                WriteNumbers(display, text);
             } else if (text === '.') {
-                WriteNumbers('.');
+                WriteNumbers(display, '.');
             } else if (text === '(' || text === ')') {
-                WriteNumbers(text);
+                WriteNumbers(display, text);
             } else {
-                WriteNumbers(text);
+                WriteNumbers(display, text);
             }
         });
     });
 }
 // 🔢 Calculator functions
-function WriteNumbers(val) {
+function WriteNumbers(display, val) {
     display.value = display.value === '0' && val !== '.' ? val : display.value + val;
-    updateLiveResult();
+    showLiveResult(display); 
 }
-function clre() { display.value = '0'; updateLiveResult(); }
-function delte() {
+function clre(display) { 
+    display.value = '0'; 
+    const resultDisplay = document.getElementById('result-display');
+    resultDisplay.textContent = '';
+    resultDisplay.classList.remove('show');
+}
+function delte(display) {
     const inptArry = display.value;
     let rslt = "";
     for (let i = 0; i < inptArry.length - 1; i++) rslt += inptArry[i];
     display.value = rslt || '0';
-    updateLiveResult();
+    showLiveResult(display); 
 }
 // 🔍 Root calculation helper function
 function calculateRoot(num, isCube = false) {
@@ -127,18 +131,62 @@ function calculateRoot(num, isCube = false) {
             }
         }
     }
-    return found ? num : 'Error';
+    return found ? num : 'Error, can\'t do complex calculations';
 }
-function getsquare() {
+function getsquare(display) {
     display.value = '√';
-    updateLiveResult();
 }
-function getsquare3() {
+function getsquare3(display) {
     display.value = '∛';
-    updateLiveResult();
+}
+// 🎯 Super simple live preview
+function showLiveResult(display) {
+    const resultDisplay = document.getElementById('result-display');
+    try {
+        let expr = display.value;
+        if (expr.includes('√')) {
+            const number = expr.replace('√', '');
+            if (number && !isNaN(number)) {
+                const num = parseFloat(number);
+                const result = calculateRoot(num, false);
+                if (result !== 'Error, can\'t do complex calculations') {
+                    resultDisplay.textContent = `= ${result}`;
+                    resultDisplay.classList.add('show');
+                    return;
+                }
+            }
+        }
+        if (expr.includes('∛')) {
+            const number = expr.replace('∛', '');
+            if (number && !isNaN(number)) {
+                const num = parseFloat(number);
+                const result = calculateRoot(num, true);
+                if (result !== 'Error, can\'t do complex calculations') {
+                    resultDisplay.textContent = `= ${result}`;
+                    resultDisplay.classList.add('show');
+                    return;
+                }
+            }
+        }
+        expr = expr.replace(/×/g, '*');
+        expr = expr.replace(/÷/g, '/');
+        expr = expr.replace(/−/g, '-');
+        const result = eval(expr);
+        if (isFinite(result)) {
+            resultDisplay.textContent = `= ${result}`;
+            resultDisplay.classList.add('show');
+        } else {
+            resultDisplay.textContent = '';
+            resultDisplay.classList.remove('show');
+        }
+    } catch { 
+        resultDisplay.textContent = '';
+        resultDisplay.classList.remove('show');
+    }
 }
 // 🧮 Calculate final answer
-function doAnser() {
+function doAnser(display) {
+    const resultDisplay = document.getElementById('result-display');
     try {
         let expr = display.value;
         // 🔍 Handle square root
@@ -147,8 +195,7 @@ function doAnser() {
             if (number && !isNaN(number)) {
                 const num = parseFloat(number);
                 display.value = calculateRoot(num, false);
-                resultDisplay.textContent = '';
-                resultDisplay.classList.remove('show');
+                document.getElementById('result-display').textContent = '';
                 return;
             }
         }
@@ -158,8 +205,7 @@ function doAnser() {
             if (number && !isNaN(number)) {
                 const num = parseFloat(number);
                 display.value = calculateRoot(num, true);
-                resultDisplay.textContent = '';
-                resultDisplay.classList.remove('show');
+                document.getElementById('result-display').textContent = '';
                 return;
             }
         }
@@ -169,47 +215,8 @@ function doAnser() {
         expr = expr.replace(/−/g, '-');
         const result = eval(expr);
         display.value = isFinite(result) ? result : 'Error';
-        // 🚫 Hide live result
-        resultDisplay.textContent = '';
-        resultDisplay.classList.remove('show');
+        document.getElementById('result-display').textContent = '';
     } catch { 
         display.value = 'Error'; 
-    }
-}
-// 📊 Show live calculation result
-function updateLiveResult() {
-    try {
-        let expr = display.value;
-        // 🔍 Live square root
-        if (expr.includes('√')) {
-            const number = expr.replace('√', '');
-            if (number && !isNaN(number)) {
-                const num = parseFloat(number);
-                const result = calculateRoot(num, false);
-                resultDisplay.textContent = result !== 'Error' ? result : '';
-                resultDisplay.classList.toggle('show', resultDisplay.textContent);
-                return;
-            }
-        }
-        // 🔍 Live cube root
-        if (expr.includes('∛')) {
-            const number = expr.replace('∛', '');
-            if (number && !isNaN(number)) {
-                const num = parseFloat(number);
-                const result = calculateRoot(num, true);
-                resultDisplay.textContent = result !== 'Error' ? result : '';
-                resultDisplay.classList.toggle('show', resultDisplay.textContent);
-                return;
-            }
-        }
-        // 🧮 Live regular calculation
-        expr = expr.replace(/×/g, '*');
-        expr = expr.replace(/÷/g, '/');
-        expr = expr.replace(/−/g, '-');
-        const result = eval(expr);
-        resultDisplay.textContent = isFinite(result) ? result : '';
-        resultDisplay.classList.toggle('show', resultDisplay.textContent && resultDisplay.textContent !== display.value);
-    } catch { 
-        resultDisplay.textContent = ''; 
     }
 }
