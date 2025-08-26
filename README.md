@@ -5,10 +5,10 @@
 <div align="center">
 
 ### 🧮 Calculator Interface
-![Calculator & Clock Pro](calculator-showcase.jpg)
+![Calculator & Clock Pro](calculator-showcase.png)
 
 ### 🕐 Digital Clock Interface  
-![Digital Clock](clock-showcase.jpg)
+![Digital Clock](clock-showcase.png)
 
 </div>
 
