@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 🏷️ Page Title -->
     <title>Calculator & Clock</title>
+    <!-- 🖼️ Website Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
+    <!-- 🎨 CSS Styling -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 🧭 Navigation Bar -->
     <nav class="navbar">
+        <!-- 🏷️ App Title and Subtitle -->
         <div class="nav-header">
             <h1 class="nav-title">🖥️ Multi-Tool Pro</h1>
             <p class="nav-subtitle">Calculator & Clock Suite</p>
         </div>
+        <!-- 🔗 Navigation Buttons -->
         <div class="nav-buttons">
             <button class="nav-btn active" data-view="calculator" onclick="showView('calculator')">
                 <span class="nav-icon">🧮</span>
@@ -25,47 +31,63 @@
         </div>
     </nav>
     
+    <!-- 🧮 Calculator Interface -->
     <div class="calculator" id="calculator-view">
+        <!-- 🏷️ Calculator Name -->
         <div class="calculator-name">Dark Calculator Pro</div>
+        <!-- 📱 Calculator Display Section -->
         <div class="display-container">
+            <!-- 🔢 Main Input Display -->
             <input type="text" id="answer" class="display" readonly value="0">
+            <!-- 📊 Live Result Display -->
             <div id="result-display" class="result-display"></div>
         </div>
+        <!-- ⌨️ Calculator Buttons Grid -->
         <div class="buttons-container">
+            <!-- 🧹 Clear and Delete Row -->
             <button class="calc-btn" data-type="clear" onclick="clre()">CE</button>
             <button class="calc-btn" data-type="backspace" onclick="delte()">⌫</button>
             <button class="calc-btn" data-type="percent" onclick="WriteNumbers('/100')">%</button>
             <button class="calc-btn operator" data-type="operator" onclick="WriteNumbers('÷')">÷</button>
             
+            <!-- 🔢 Number Row 1 (7, 8, 9) -->
             <button class="calc-btn" data-type="number" onclick="WriteNumbers('7')">7</button>
             <button class="calc-btn" data-type="number" onclick="WriteNumbers('8')">8</button>
             <button class="calc-btn" data-type="number" onclick="WriteNumbers('9')">9</button>
             <button class="calc-btn operator" data-type="operator" onclick="WriteNumbers('×')">×</button>
             
+            <!-- 🔢 Number Row 2 (4, 5, 6) -->
             <button class="calc-btn" data-type="number" onclick="WriteNumbers('4')">4</button>
             <button class="calc-btn" data-type="number" onclick="WriteNumbers('5')">5</button>
             <button class="calc-btn" data-type="number" onclick="WriteNumbers('6')">6</button>
             <button class="calc-btn operator" data-type="operator" onclick="WriteNumbers('−')">−</button>
             
+            <!-- 🔢 Number Row 3 (1, 2, 3) -->
             <button class="calc-btn" data-type="number" onclick="WriteNumbers('1')">1</button>
             <button class="calc-btn" data-type="number" onclick="WriteNumbers('2')">2</button>
             <button class="calc-btn" data-type="number" onclick="WriteNumbers('3')">3</button>
             <button class="calc-btn operator" data-type="operator" onclick="WriteNumbers('+')">+</button>
             
+            <!-- 🔢 Number Row 4 (0, Decimal, Equals) -->
             <button class="calc-btn wide" data-type="number" onclick="WriteNumbers('0')">0</button>
             <button class="calc-btn" data-type="decimal" onclick="WriteNumbers('.')">.</button>
             <button class="calc-btn equals" data-type="equals" onclick="doAnser()">=</button>
             
+            <!-- 🔬 Scientific Functions Row -->
             <button class="calc-btn function" data-type="sqrt" onclick="getsquare()">√</button>
             <button class="calc-btn function" data-type="cbrt" onclick="getsquare3()">∛</button>
             <button class="calc-btn" data-type="bracket" onclick="WriteNumbers('(')">(</button>
             <button class="calc-btn" data-type="bracket" onclick="WriteNumbers(')')">)</button>
         </div>
+        <!-- 📄 Copyright Notice -->
         <div class="copyright">© 2025 All Rights Reserved - Alhussien Hazem</div>
     </div>
     
+    <!-- 🕐 Digital Clock Interface -->
     <div class="clock" id="clock-view" style="display: none;">
+        <!-- 🏷️ Clock Name -->
         <div class="clock-name">Digital Clock</div>
+        <!-- ⏰ Time Display Section -->
         <div class="time-display" id="time-display">
             <span class="time-part">12</span>
             <span class="time-separator">:</span>
@@ -74,10 +96,13 @@
             <span class="time-part">00</span>
             <span class="ampm">AM</span>
         </div>
+        <!-- 📅 Date Display -->
         <div class="date-display" id="date-display">Loading...</div>
+        <!-- 📄 Copyright Notice -->
         <div class="copyright">© 2025 All Rights Reserved - Alhussien Hazem</div>
     </div>
     
+    <!-- 🚀 JavaScript Functionality -->
     <script src="script.js"></script>
 </body>
 </html>
