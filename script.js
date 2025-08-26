@@ -1,351 +1,215 @@
-// 🎯 Calculator state variables
-let displayValue = '0';
-let isError = false;
-
-// 🚀 Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    setupNavbar();
-    setupClock();
-    
-    // 📱 Show calculator by default
+// 🚀 Multi-Tool Calculator & Clock
+let display = document.getElementById('answer');
+let resultDisplay = document.getElementById('result-display');
+// 🌟 Initialize everything when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    showView('calculator');
+    setInterval(updateClock, 1000);
+    setupCalculator();
+});
+// 🧭 Switch between calculator and clock views
+function showView(view) {
+    // 🔍 Get the calculator and clock elements
     const calculator = document.getElementById('calculator-view');
     const clock = document.getElementById('clock-view');
-    
-    if (calculator) calculator.style.display = 'block';
-    if (clock) clock.style.display = 'none';
-    
-    // ✨ Add loaded class for animations
-    if (calculator) calculator.classList.add('loaded');
-});
-
-// 🧭 Navigation system
-function setupNavbar() {
+    // 📱 Show calculator or clock based on what was clicked
+    if (view === 'calculator') {
+        calculator.style.display = 'block';
+        clock.style.display = 'none';
+    } else if (view === 'clock') {
+        calculator.style.display = 'none';
+        clock.style.display = 'block';
+    }
+    // 🎯 Update navigation buttons to show which one is active
     const buttons = document.querySelectorAll('.nav-btn');
-    buttons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const view = this.getAttribute('data-view');
-            showView(view);
+    for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].getAttribute('data-view') === view) {
+            buttons[i].classList.add('active');
+        } else {
+            buttons[i].classList.remove('active');
+        }
+    }
+}
+// 🕐 Update clock every second
+function updateClock() {
+    // ⏰ Get current date and time
+    const now = new Date();
+    // 🔢 Update time parts (hours, minutes, seconds)
+    const timeParts = document.querySelectorAll('.time-part');
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    // 🔄 Convert to 12-hour format
+    if (hours >= 12) {
+        hours = hours - 12;
+    }
+    if (hours === 0) {
+        hours = 12;
+    }
+    // 📺 Update the time display
+    timeParts[0].textContent = hours.toString().padStart(2, '0');
+    timeParts[1].textContent = minutes.toString().padStart(2, '0');
+    timeParts[2].textContent = seconds.toString().padStart(2, '0');
+    // 🌅 Update AM/PM
+    if (now.getHours() >= 12) {
+        document.querySelector('.ampm').textContent = 'PM';
+    } else {
+        document.querySelector('.ampm').textContent = 'AM';
+    }
+    // 📅 Update the date display
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    };
+    const dateString = now.toLocaleDateString('en-US', options);
+    document.getElementById('date-display').textContent = dateString;
+}
+// 🧮 Set up calculator button listeners
+function setupCalculator() {
+    const buttons = document.querySelectorAll('.calc-btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const text = button.textContent;
             
-            // 🔄 Update active button
-            buttons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+            if (text === '=') {
+                doAnser();
+            } else if (text === 'CE') {
+                clre();
+            } else if (text === '⌫') {
+                delte();
+            } else if (text === '√') {
+                getsquare();
+            } else if (text === '∛') {
+                getsquare3();
+            } else if (text === '÷' || text === '×' || text === '−' || text === '+') {
+                WriteNumbers(text);
+            } else if (text === '.') {
+                WriteNumbers('.');
+            } else if (text === '(' || text === ')') {
+                WriteNumbers(text);
+            } else {
+                WriteNumbers(text);
+            }
         });
     });
 }
-
-function showView(viewName) {
-    const calculator = document.getElementById('calculator-view');
-    const clock = document.getElementById('clock-view');
-    
-    if (viewName === 'calculator') {
-        if (calculator) calculator.style.display = 'block';
-        if (clock) clock.style.display = 'none';
-        if (calculator) calculator.classList.add('loaded');
-    } else if (viewName === 'clock') {
-        if (calculator) calculator.style.display = 'none';
-        if (clock) clock.style.display = 'block';
-        if (clock) clock.classList.add('loaded');
-    }
+// 🔢 Calculator functions
+function WriteNumbers(val) {
+    display.value = display.value === '0' && val !== '.' ? val : display.value + val;
+    updateLiveResult();
 }
-
-// 🕐 Digital clock system
-function setupClock() {
-    updateClock();
-    setInterval(updateClock, 1000);
+function clre() { display.value = '0'; updateLiveResult(); }
+function delte() {
+    const inptArry = display.value;
+    let rslt = "";
+    for (let i = 0; i < inptArry.length - 1; i++) rslt += inptArry[i];
+    display.value = rslt || '0';
+    updateLiveResult();
 }
-
-function updateClock() {
-    const now = new Date();
-    
-    // ⏰ Get time components
-    let hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-    
-    // 🔄 Convert to 12-hour format
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    
-    // 📝 Format time with leading zeros
-    const formattedHours = hours.toString().padStart(2, '0');
-    const formattedMinutes = minutes.toString().padStart(2, '0');
-    const formattedSeconds = seconds.toString().padStart(2, '0');
-    
-    // 🎯 Update time display with individual parts
-    const timeDisplay = document.getElementById('time-display');
-    if (timeDisplay) {
-        const timeParts = timeDisplay.querySelectorAll('.time-part');
-        const ampmElement = timeDisplay.querySelector('.ampm');
-        
-        if (timeParts.length >= 3) {
-            timeParts[0].textContent = formattedHours;
-            timeParts[1].textContent = formattedMinutes;
-            timeParts[2].textContent = formattedSeconds;
+// 🔍 Root calculation helper function
+function calculateRoot(num, isCube = false) {
+    if (num === 1) return 1;
+    let found = false;
+    if (num % 2 === 0) {
+        for (let i = 2; i <= num / 2; i++) {
+            if (i % 2 === 0) {
+                const rslt = isCube ? i * i * i : i * i;
+                if (rslt === num) { found = true; return i; }
+            }
         }
-        
-        if (ampmElement) {
-            ampmElement.textContent = ampm;
-        }
-    }
-    
-    // 📅 Update date display
-    const dateDisplay = document.getElementById('date-display');
-    if (dateDisplay) {
-        const options = { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        };
-        const formattedDate = now.toLocaleDateString('en-US', options);
-        dateDisplay.textContent = formattedDate;
-    }
-}
-
-// 🧮 Calculator functions
-function WriteNumbers(num) {
-    if (isError) {
-        clearError();
-    }
-    
-    const display = document.getElementById('answer');
-    
-    if (display.value === '0' && num !== '.') {
-        display.value = num;
     } else {
-        display.value += num;
+        for (let i = 3; i <= num / 3; i++) {
+            if (i % 2 !== 0) {
+                const rslt = isCube ? i * i * i : i * i;
+                if (rslt === num) { found = true; return i; }
+            }
+        }
     }
-    
+    return found ? num : 'Error';
+}
+function getsquare() {
+    display.value = '√';
     updateLiveResult();
 }
-
-function clre() {
-    if (isError) {
-        clearError();
-    }
-    
-    const display = document.getElementById('answer');
-    display.value = '0';
+function getsquare3() {
+    display.value = '∛';
     updateLiveResult();
 }
-
+// 🧮 Calculate final answer
 function doAnser() {
-    if (isError) {
-        clearError();
-        return;
-    }
-    
-    const display = document.getElementById('answer');
-    let expression = display.value;
-    
-    // 🔍 Check for empty expression
-    if (!expression || expression === '0' || expression === '()') {
-        display.value = '0';
-        return;
-    }
-    
     try {
-        // 🔄 Replace symbols for eval
-        let jsExpression = expression
-            .replace(/×/g, '*')
-            .replace(/÷/g, '/')
-            .replace(/−/g, '-');
-        
-        let result;
-        
-        // 📐 Handle square root
-        if (jsExpression.includes('√')) {
-            let innerExpression = jsExpression.replace('√', '');
-            if (innerExpression) {
-                let evaluated = eval(innerExpression);
-                if (!isNaN(evaluated)) {
-                    result = Math.sqrt(evaluated);
-                }
+        let expr = display.value;
+        // 🔍 Handle square root
+        if (expr.includes('√')) {
+            const number = expr.replace('√', '');
+            if (number && !isNaN(number)) {
+                const num = parseFloat(number);
+                display.value = calculateRoot(num, false);
+                resultDisplay.textContent = '';
+                resultDisplay.classList.remove('show');
+                return;
             }
         }
-        // 📏 Handle cube root
-        else if (jsExpression.includes('∛')) {
-            let innerExpression = jsExpression.replace('∛', '');
-            if (innerExpression) {
-                let evaluated = eval(innerExpression);
-                if (!isNaN(evaluated)) {
-                    result = Math.cbrt(evaluated);
-                }
-            }
-        }
-        // ⚡ Handle power
-        else if (jsExpression.includes('^')) {
-            let parts = jsExpression.split('^');
-            if (parts.length === 2) {
-                let base = parseFloat(parts[0]);
-                let exponent = parseFloat(parts[1]);
-                if (!isNaN(base) && !isNaN(exponent)) {
-                    result = Math.pow(base, exponent);
-                }
+        // 🔍 Handle cube root
+        if (expr.includes('∛')) {
+            const number = expr.replace('∛', '');
+            if (number && !isNaN(number)) {
+                const num = parseFloat(number);
+                display.value = calculateRoot(num, true);
+                resultDisplay.textContent = '';
+                resultDisplay.classList.remove('show');
+                return;
             }
         }
         // 🧮 Regular calculation
-        else {
-            result = eval(jsExpression);
-        }
-        
-        // 📊 Display result
-        if (result !== undefined && !isNaN(result)) {
-            if (result === Infinity || result === -Infinity) {
-                display.value = 'Infinity';
-            } else {
-                display.value = result;
-            }
-        } else {
-            display.value = 'Error';
-            isError = true;
-        }
-        
-        updateLiveResult();
-        
-    } catch (e) {
-        display.value = 'Error';
-        isError = true;
-        updateLiveResult();
+        expr = expr.replace(/×/g, '*');
+        expr = expr.replace(/÷/g, '/');
+        expr = expr.replace(/−/g, '-');
+        const result = eval(expr);
+        display.value = isFinite(result) ? result : 'Error';
+        // 🚫 Hide live result
+        resultDisplay.textContent = '';
+        resultDisplay.classList.remove('show');
+    } catch { 
+        display.value = 'Error'; 
     }
 }
-
-function getsquare() {
-    if (isError) {
-        clearError();
-    }
-    
-    const display = document.getElementById('answer');
-    
-    if (!display.value.includes('√')) {
-        display.value += '√';
-    } else {
-        display.value = display.value.replace('√', '');
-    }
-    
-    updateLiveResult();
-}
-
-function getsquare3() {
-    if (isError) {
-        clearError();
-    }
-    
-    const display = document.getElementById('answer');
-    
-    if (!display.value.includes('∛')) {
-        display.value += '∛';
-    } else {
-        display.value = display.value.replace('∛', '');
-    }
-    
-    updateLiveResult();
-}
-
-function delte() {
-    if (isError) {
-        clearError();
-        return;
-    }
-    
-    const display = document.getElementById('answer');
-    let currentValue = display.value;
-    
-    if (currentValue.length === 1) {
-        display.value = '0';
-    } else {
-        display.value = currentValue.slice(0, -1);
-    }
-    
-    updateLiveResult();
-}
-
-function powr() {
-    if (isError) {
-        clearError();
-    }
-    
-    const display = document.getElementById('answer');
-    display.value += '^';
-    updateLiveResult();
-}
-
-// 📊 Live result display system
+// 📊 Show live calculation result
 function updateLiveResult() {
-    const display = document.getElementById('answer');
-    const resultDisplay = document.getElementById('result-display');
-    let expression = display.value;
-    
-    // 🚫 Don't show result for simple numbers
-    if (expression === '' || expression === '0' || !/[+\-×÷^√∛()]/.test(expression)) {
-        resultDisplay.textContent = '';
-        resultDisplay.classList.remove('show');
-        return;
-    }
-    
     try {
-        // 🔄 Convert symbols for evaluation
-        let jsExpression = expression
-            .replace(/×/g, '*')
-            .replace(/÷/g, '/')
-            .replace(/−/g, '-');
-        
-        let result;
-        
-        // 🎯 Handle special functions
-        if (jsExpression.includes('√')) {
-            let innerExpression = jsExpression.replace('√', '');
-            if (innerExpression) {
-                let evaluated = eval(innerExpression);
-                if (!isNaN(evaluated)) {
-                    result = Math.sqrt(evaluated);
-                }
+        let expr = display.value;
+        // 🔍 Live square root
+        if (expr.includes('√')) {
+            const number = expr.replace('√', '');
+            if (number && !isNaN(number)) {
+                const num = parseFloat(number);
+                const result = calculateRoot(num, false);
+                resultDisplay.textContent = result !== 'Error' ? result : '';
+                resultDisplay.classList.toggle('show', resultDisplay.textContent);
+                return;
             }
-        } else if (jsExpression.includes('∛')) {
-            let innerExpression = jsExpression.replace('∛', '');
-            if (innerExpression) {
-                let evaluated = eval(innerExpression);
-                if (!isNaN(evaluated)) {
-                    result = Math.cbrt(evaluated);
-                }
-            }
-        } else if (jsExpression.includes('^')) {
-            let parts = jsExpression.split('^');
-            if (parts.length === 2) {
-                let base = parseFloat(parts[0]);
-                let exponent = parseFloat(parts[1]);
-                if (!isNaN(base) && !isNaN(exponent)) {
-                    result = Math.pow(base, exponent);
-                }
-            }
-        } else {
-            result = eval(jsExpression);
         }
-        
-        // 🎉 Show result
-        if (result !== undefined && !isNaN(result)) {
-            if (result === Infinity || result === -Infinity) {
-                resultDisplay.textContent = 'Infinity';
-            } else {
-                resultDisplay.textContent = result;
+        // 🔍 Live cube root
+        if (expr.includes('∛')) {
+            const number = expr.replace('∛', '');
+            if (number && !isNaN(number)) {
+                const num = parseFloat(number);
+                const result = calculateRoot(num, true);
+                resultDisplay.textContent = result !== 'Error' ? result : '';
+                resultDisplay.classList.toggle('show', resultDisplay.textContent);
+                return;
             }
-            resultDisplay.classList.add('show');
-        } else {
-            resultDisplay.textContent = '';
-            resultDisplay.classList.remove('show');
         }
-        
-    } catch (e) {
-        resultDisplay.textContent = '';
-        resultDisplay.classList.remove('show');
+        // 🧮 Live regular calculation
+        expr = expr.replace(/×/g, '*');
+        expr = expr.replace(/÷/g, '/');
+        expr = expr.replace(/−/g, '-');
+        const result = eval(expr);
+        resultDisplay.textContent = isFinite(result) ? result : '';
+        resultDisplay.classList.toggle('show', resultDisplay.textContent && resultDisplay.textContent !== display.value);
+    } catch { 
+        resultDisplay.textContent = ''; 
     }
-}
-
-// 🚨 Error handling system
-function clearError() {
-    isError = false;
-    const display = document.getElementById('answer');
-    display.value = '0';
-    updateLiveResult();
 }
