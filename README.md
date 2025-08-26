@@ -5,10 +5,10 @@
 <div align="center">
 
 ### 🧮 Calculator Interface
-![Calculator & Clock Pro](calculator-showcase.png)
+![Calculator & Clock Pro](images/calculator-showcase.png)
 
 ### 🕐 Digital Clock Interface  
-![Digital Clock](clock-showcase.png)
+![Digital Clock](images/clock-showcase.png)
 
 </div>
 
@@ -113,9 +113,10 @@ calculator-clock-pro/
 ├── script.js               # Calculator logic, clock functions, and navigation
 ├── style.css               # Complete styling for both calculator and clock
 ├── README.md               # This file
-├── calculator-showcase.jpg # Calculator preview image
-├── clock-showcase.jpg      # Clock preview image
-└── favicon.png            # Website favicon
+├── images/                 # Project images and assets
+│   ├── calculator-showcase.png  # Calculator preview image
+│   ├── clock-showcase.png       # Clock preview image
+│   └── favicon.png             # Website favicon
 ```
 
 ---
