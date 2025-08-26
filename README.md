@@ -1,16 +1,20 @@
-# 🧮 Dark Calculator Pro - Advanced Scientific Calculator
+# 🧮 Calculator & Clock Pro - Advanced Scientific Calculator & Digital Clock
 
-## 📸 Calculator Preview
+## 📸 Project Showcase
 
 <div align="center">
 
-![Dark Calculator Pro](calculator-showcase.jpg)
+### 🧮 Calculator Interface
+![Calculator & Clock Pro](calculator-showcase.jpg)
+
+### 🕐 Digital Clock Interface  
+![Digital Clock](clock-showcase.jpg)
 
 </div>
 
 <div align="center">
 
-> *Professional dark-themed scientific calculator with advanced mathematical functions and elegant UI design*
+> *Professional dark-themed scientific calculator with advanced math functions and elegant digital clock interface*
 
 </div>
 
@@ -25,6 +29,7 @@
 - [🚀 Getting Started](#-getting-started)
 - [🎯 Key Features](#-key-features)
 - [🧮 Calculator Functions](#-calculator-functions)
+- [🕐 Clock Features](#-clock-features)
 - [📱 User Experience](#-user-experience)
 - [🌟 Special Thanks](#-special-thanks)
 
@@ -32,19 +37,28 @@
 
 ## 📋 Project Overview
 
-**Dark Calculator Pro** is a sophisticated, dark-themed scientific calculator built entirely with vanilla JavaScript and DOM manipulation. This project showcases advanced mathematical operations, elegant UI design, and professional calculator functionality without external dependencies. Perfect for developers, students, and professionals who need a powerful calculation tool.
+**Calculator & Clock Pro** is a sophisticated, dark-themed scientific calculator with an integrated digital clock, built entirely with vanilla JavaScript, HTML5, and CSS3. This project showcases advanced mathematical operations, elegant UI design, professional calculator functionality, and a real-time digital clock interface without external dependencies. Perfect for developers, students, and professionals who need a powerful calculation tool with timekeeping capabilities.
 
 ---
 
 ## ✨ Features
 
 ### 🎯 **Advanced Mathematical Operations**
-- Basic arithmetic operations (+, -, *, /)
+- Basic arithmetic operations (+, -, ×, ÷)
 - Square root (√) and cube root (∛) functions
 - Power calculations (x^y)
 - Percentage calculations
 - Complex expression evaluation
 - Parentheses support for order of operations
+- Live result preview
+- Error handling for division by zero
+
+### 🕐 **Digital Clock System**
+- Real-time 12-hour format display
+- AM/PM indicator
+- Full date display (day, month, year)
+- Automatic updates every second
+- Professional dark theme styling
 
 ### 🎨 **Professional User Interface**
 - Dark theme with modern color scheme
@@ -52,6 +66,7 @@
 - Smooth hover effects and animations
 - Professional typography and spacing
 - Elegant shadows and borders
+- Interactive navigation between calculator and clock
 
 ### 🧮 **Scientific Calculator Functions**
 - Square root with complex expressions
@@ -59,6 +74,7 @@
 - Power function with iterative calculation
 - Error handling for invalid expressions
 - Memory-efficient calculation system
+- Live calculation preview
 
 ### 📱 **User Experience Features**
 - Clear display with left-aligned text
@@ -66,47 +82,54 @@
 - Clear entry (CE) button
 - Responsive button feedback
 - Professional animations and transitions
+- Seamless switching between calculator and clock views
+- Error state management
 
 ### 🚀 **Technical Excellence**
 - Pure vanilla JavaScript implementation
-- DOM manipulation and dynamic styling
+- Clean separation of concerns (HTML, CSS, JS)
 - Event-driven architecture
 - Cross-browser compatibility
 - No external dependencies
+- Responsive design principles
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **HTML5** - Semantic structure and input elements
-- **Vanilla JavaScript** - DOM manipulation and calculator logic
-- **CSS-in-JS** - Dynamic styling with JavaScript
-- **Modern UI/UX** - Professional calculator design
-- **Responsive Design** - Adaptive layout system
+- **HTML5** - Semantic structure, input elements, and navigation
+- **CSS3** - Advanced styling, animations, and responsive design
+- **Vanilla JavaScript** - DOM manipulation, calculator logic, and clock functionality
+- **Modern UI/UX** - Professional calculator and clock design
+- **Responsive Design** - Adaptive layout system for all screen sizes
 
 ---
 
 ## 📁 Project Structure
 
 ```
-dark-theme-calculator-pro/
-├── index.html          # Main calculator interface
-├── script.js           # Calculator logic and UI
-├── style.css           # Additional styling (if any)
-├── README.md           # This file
-└── calculator-showcase.jpg  # Calculator preview image
+calculator-clock-pro/
+├── index.html              # Main interface with calculator and clock
+├── script.js               # Calculator logic, clock functions, and navigation
+├── style.css               # Complete styling for both calculator and clock
+├── README.md               # This file
+├── calculator-showcase.jpg # Calculator preview image
+├── clock-showcase.jpg      # Clock preview image
+└── favicon.png            # Website favicon
 ```
 
 ---
 
 ## 🎨 Design Features
 
-- **Dark Theme** - Professional dark color scheme
-- **Modern UI** - Clean, organized button layout
+- **Dark Theme** - Professional dark color scheme throughout
+- **Modern UI** - Clean, organized button layout and clock display
 - **Interactive Elements** - Hover effects and smooth transitions
-- **Professional Typography** - Clear, readable display
+- **Professional Typography** - Clear, readable displays
 - **Elegant Shadows** - Depth and visual hierarchy
 - **Responsive Layout** - Adapts to different screen sizes
+- **Navigation Bar** - Professional horizontal navigation between views
+- **Consistent Styling** - Unified design language across both interfaces
 
 ---
 
@@ -114,13 +137,14 @@ dark-theme-calculator-pro/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/alhussienhazem/dark-theme-calculator-pro.git
+   git clone https://github.com/alhussienhazem/calculator-clock-pro.git
    ```
 
 2. **Open in your browser**
    - Open `index.html` in your web browser
+   - Use the navigation bar to switch between calculator and clock
    - Start calculating with the professional interface
-   - Test advanced functions like square root and powers
+   - View the real-time digital clock
 
 ---
 
@@ -133,6 +157,9 @@ dark-theme-calculator-pro/
 - ✅ **Pure JavaScript** - No external dependencies
 - ✅ **Responsive Design** - Works on all screen sizes
 - ✅ **Advanced Math** - Professional calculation capabilities
+- ✅ **Digital Clock** - Real-time 12-hour format display
+- ✅ **Live Preview** - Instant calculation results
+- ✅ **Navigation System** - Seamless switching between views
 
 ---
 
@@ -141,9 +168,9 @@ dark-theme-calculator-pro/
 | Function | Symbol | Description |
 |----------|--------|-------------|
 | **Addition** | `+` | Standard addition with decimal support |
-| **Subtraction** | `-` | Standard subtraction operations |
-| **Multiplication** | `*` | Product calculations |
-| **Division** | `/` | Division with error handling |
+| **Subtraction** | `−` | Standard subtraction operations |
+| **Multiplication** | `×` | Product calculations |
+| **Division** | `÷` | Division with error handling |
 | **Percentage** | `%` | Automatic division by 100 |
 | **Square Root** | `√` | Calculate square root of numbers or expressions |
 | **Cube Root** | `∛` | Calculate cube root of numbers or expressions |
@@ -156,38 +183,61 @@ dark-theme-calculator-pro/
 
 ---
 
+## 🕐 Clock Features
+
+| Feature | Description |
+|---------|-------------|
+| **Time Display** | Real-time 12-hour format (HH:MM:SS) |
+| **AM/PM Indicator** | Automatic AM/PM display |
+| **Date Display** | Full date (e.g., "Tuesday, August 26, 2025") |
+| **Auto-Update** | Updates every second automatically |
+| **Professional Styling** | Matches calculator design theme |
+| **Responsive Layout** | Adapts to different screen sizes |
+
+---
+
 ## 📱 User Experience
 
 ### 🎨 **Visual Design**
 - **Dark theme** - Professional dark color scheme
-- **Button grid** - Organized 4-column layout
-- **Display area** - Large, clear input/output display
-- **Hover effects** - Interactive feedback on buttons
-- **Smooth animations** - Professional transitions
+- **Button grid** - Organized 4-column layout for calculator
+- **Clock display** - Large, clear time and date display
+- **Navigation bar** - Professional horizontal navigation
+- **Hover effects** - Interactive feedback on all elements
+- **Smooth animations** - Professional transitions throughout
 
 ### 🧮 **Calculation Flow**
 1. **Input numbers** - Type numbers and operators
 2. **Use functions** - Apply square root, cube root, or powers
 3. **Complex expressions** - Use parentheses for order control
-4. **Get results** - Press equals for instant calculation
-5. **Error handling** - Clear feedback for invalid input
+4. **Live preview** - See results in real-time
+5. **Get final results** - Press equals for complete calculation
+6. **Error handling** - Clear feedback for invalid input
+
+### 🕐 **Clock Experience**
+1. **Real-time display** - Always current time and date
+2. **12-hour format** - Familiar AM/PM time display
+3. **Professional styling** - Consistent with calculator theme
+4. **Automatic updates** - No manual refresh needed
 
 ### 🎯 **Learning Benefits**
-- **DOM manipulation** - Creating and styling elements dynamically
+- **DOM manipulation** - Working with existing HTML elements
 - **Event handling** - Click events and user interactions
 - **Mathematical logic** - Complex calculation algorithms
-- **CSS-in-JS** - Dynamic styling with JavaScript
-- **Professional UI/UX** - Calculator interface design principles
+- **Time management** - Date object and interval handling
+- **Professional UI/UX** - Calculator and clock interface design principles
+- **Code organization** - Clean separation of HTML, CSS, and JavaScript
 
 ---
 
 ## 🌟 Special Thanks
 
-- **Instructor Badr** - For assigning this comprehensive calculator development task
-- **Modern web standards** - For enabling powerful DOM manipulation
-- **Vanilla JavaScript** - For robust calculation capabilities
+- **Instructor Badr** - For assigning this comprehensive calculator and clock development task
+- **Modern web standards** - For enabling powerful DOM manipulation and CSS3 features
+- **Vanilla JavaScript** - For robust calculation and timekeeping capabilities
 - **Mathematical functions** - For inspiring advanced calculator features
+- **Time and date APIs** - For enabling professional clock functionality
 
 ---
 
-*Built with ❤️ for learning advanced calculator development and professional UI design principles*
+*Built with ❤️ for learning advanced calculator development, digital clock implementation, and professional UI design principles*
